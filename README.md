@@ -21,7 +21,15 @@ just run:
 
 That's it. Visit <http://localhost:3030> to get into the fast-data-dev environment
 
-<img src="https://storage.googleapis.com/wch/fast-data-dev-ports.png" alt="fast-data-dev web UI screenshot" type="image/png" width="320">
+| Port        | Service           | JMX  |
+| ------------- |-------------| -----:|
+| 9092      | Kafka Broker | 9581 |
+| 8081      | Schema Registry      |   9582 |
+| 8082      | Kafka Rest Proxy      |   9583 |
+| 8083      | Kafka Connect Distributed      |   9584 |
+| 2081      | Zookeeper     |  9585  |
+| 3030      | Web Server      |    |
+
 
 All the service ports are exposed, and can be used from localhost / or within your IntelliJ.
 To access the JMX data of the broker run:
