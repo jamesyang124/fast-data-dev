@@ -50,14 +50,18 @@ EOF
 fi
 
 ## MAKE TWO NODES ZOOKEEPER CONNECT
+if [[ ! -z "${ZOOKEEPER_CONNECT}" ]]; then
 sed -e 's/zookeeper.connect=localhost:2181/zookeeper.connect='"$ZOOKEEPER_CONNECT"'/' -i \
     /opt/confluent/etc/kafka/zookeeper.properties \
     /opt/confluent/etc/kafka/server.properties \
     /opt/confluent/etc/schema-registry/schema-registry.properties \
     /opt/confluent/etc/schema-registry/connect-avro-distributed.properties
+fi
 
-sed -e 's/broker.id=/broker.id='"$BROKER_ID"'/' -i \
+if [[ ! -z "${BROKER_ID}" ]]; then
+sed -e 's/broker.id=0/broker.id='"$BROKER_ID"'/' -i \
     /opt/confluent/etc/kafka/server.properties \
+fi
 
 ## Broker specific
 cat <<EOF >>/opt/confluent/etc/kafka/server.properties
