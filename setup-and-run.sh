@@ -41,11 +41,13 @@ sed -e 's/2181/'"$ZK_PORT"'/' -e 's/8081/'"$REGISTRY_PORT"'/' -e 's/9092/'"$BROK
     /opt/confluent/etc/schema-registry/connect-avro-distributed.properties
 
 ## SETUP TWO NODES ZOOKEEPER INSTANCE
+if [[ ! -z "${ZOOKEEPER_SERVER}" ]]; then
 cat <<EOF >>/opt/confluent/etc/kafka/zookeeper.properties
 
-  server.1=$ZOOKEEPER_SERVER:22888:23888
-  server.2=$ZOOKEEPER_SERVER:32888:33888
+server.1=$ZOOKEEPER_SERVER:22888:23888
+server.2=$ZOOKEEPER_SERVER:32888:33888
 EOF
+fi
 
 ## MAKE TWO NODES ZOOKEEPER CONNECT
 sed -e 's/zookeeper.connect=localhost:2181/zookeeper.connect='"$ZOOKEEPER_CONNECT"'/' -i \
