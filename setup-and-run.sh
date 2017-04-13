@@ -42,7 +42,7 @@ sed -e 's/2181/'"$ZK_PORT"'/' -e 's/8081/'"$REGISTRY_PORT"'/' -e 's/9092/'"$BROK
 
 ## SETUP TWO NODES ZOOKEEPER INSTANCE
 if [[ ! -z "${ZOOKEEPER_SERVER}" ]]; then
-cat <<EOF >>/opt/confluent/etc/kafka/zookeeper.properties
+  cat <<EOF >>/opt/confluent/etc/kafka/zookeeper.properties
 
 server.1=$ZOOKEEPER_SERVER:22888:23888
 server.2=$ZOOKEEPER_SERVER:32888:33888
@@ -51,7 +51,7 @@ fi
 
 ## MAKE TWO NODES ZOOKEEPER CONNECT
 if [[ ! -z "${ZOOKEEPER_CONNECT}" ]]; then
-sed -e 's/zookeeper.connect=localhost:2181/zookeeper.connect='"$ZOOKEEPER_CONNECT"'/' -i \
+  sed -e 's/zookeeper.connect=localhost:2181/zookeeper.connect='"$ZOOKEEPER_CONNECT"'/' -i \
     /opt/confluent/etc/kafka/zookeeper.properties \
     /opt/confluent/etc/kafka/server.properties \
     /opt/confluent/etc/schema-registry/schema-registry.properties \
@@ -59,8 +59,8 @@ sed -e 's/zookeeper.connect=localhost:2181/zookeeper.connect='"$ZOOKEEPER_CONNEC
 fi
 
 if [[ ! -z "${BROKER_ID}" ]]; then
-sed -e 's/broker.id=0/broker.id='"$BROKER_ID"'/' -i \
-    /opt/confluent/etc/kafka/server.properties \
+  sed -e 's/broker.id=0/broker.id='"$BROKER_ID"'/' -i \
+    /opt/confluent/etc/kafka/server.properties
 fi
 
 ## Broker specific
